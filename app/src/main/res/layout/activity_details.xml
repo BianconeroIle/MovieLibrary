@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/darkGray">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView2"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true">
+
+        <RelativeLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:id="@+id/relative_layout"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:id="@+id/media"
+                android:layout_below="@+id/titleLayout"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/iv_avatar"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true">
+
+                </ImageView>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/titleLayout"
+                android:layout_width="match_parent"
+                android:layout_height="60dp">
+
+                <TextView
+                    android:id="@+id/tv_titleMovie"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:textSize="20dp"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textColor="@color/lighestGray"
+                    android:textStyle="bold"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/contentLayout"
+                android:padding="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/media"
+                android:visibility="visible">
+
+                <TextView
+                    android:id="@+id/tv_overview_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="3dp"
+                    android:textColor="@color/lighestGray"
+                    android:maxLines="5"
+                    android:ellipsize="end"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_below="@+id/tv_overview"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:layout_marginRight="6dp" />
+
+                <TextView
+                    android:id="@+id/tv_overview"
+                    android:layout_marginLeft="3dp"
+                    android:textColor="@color/lighestGray"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Overview"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:layout_marginTop="5dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/tv_rating"
+                    android:layout_alignParentLeft="true" />
+
+                <TextView
+                    android:id="@+id/tv_rating"
+                    android:textColor="@color/lighestGray"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="22dp"
+                    android:layout_marginTop="5dp"
+                    android:textStyle="bold"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:layout_below="@+id/tv_genres"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="34dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="34dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/star"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="3dp"
+                    android:id="@+id/iv_star"
+                    android:layout_below="@+id/tv_genres"
+                    android:layout_alignBottom="@+id/tv_rating"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/lighestGray"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textStyle="bold"
+                    android:id="@+id/tv_release_date"
+                    android:textSize="15dp"
+                    android:layout_below="@+id/tv_genres"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true" />
+
+                <TextView
+                    android:text="Release date"
+                    android:textColor="@color/lighestGray"
+                    android:textStyle="bold"
+                    android:textSize="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_releaseDate"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true" />
+
+                <TextView
+                    android:id="@+id/tv_genres"
+                    android:layout_marginLeft="3dp"
+                    android:textColor="@color/lighestGray"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Genres"
+                    android:textSize="15dp"
+                    android:layout_toLeftOf="@+id/tv_releaseDate"
+                    android:textStyle="bold"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignStart="@+id/tv_overview"
+                    android:layout_alignLeft="@+id/tv_overview" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:orientation="horizontal"
+                android:id="@+id/trailerLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="3dp"
+                android:layout_below="@+id/contentLayout"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.7dp"
+                    android:background="@android:color/white" />
+
+                <TextView
+                    android:text="Play Trailer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_playtxt"
+                    android:textSize="15dp"
+                    android:drawableLeft="@drawable/ic_yt_logo"
+                    android:layout_centerVertical="true"
+                    android:gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:drawablePadding="10dp"
+                    android:textColor="@color/lighestGray"
+                    android:layout_marginStart="17dp"
+                    android:layout_marginLeft="17dp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.7dp"
+                    android:layout_below="@+id/tv_playtxt"
+                    android:background="@android:color/white" />
+
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+    </ScrollView>
+
+
+</RelativeLayout>
