@@ -1,19 +1,14 @@
 package com.example.ilijaangeleski.careem.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.ImageView;
-import android.widget.MediaController;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ilijaangeleski.careem.R;
 import com.example.ilijaangeleski.careem.api.NetworkApi;
-import com.example.ilijaangeleski.careem.model.GenreDTO;
 import com.example.ilijaangeleski.careem.model.MovieDTO;
 import com.example.ilijaangeleski.careem.presenter.MovieDetailsPresenter;
 import com.example.ilijaangeleski.careem.view.MovieDetailsView;
@@ -22,7 +17,6 @@ import com.squareup.picasso.Picasso;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -33,7 +27,7 @@ import butterknife.ButterKnife;
  * Created by Ilija Angeleski on 1/14/2018.
  */
 
-public class MovieDetailsActivity extends AppCompatActivity implements View.OnClickListener, MovieDetailsView {
+public class MovieDetailsActivity extends AppCompatActivity implements MovieDetailsView {
     public static final String MOVIEDB_EXTRA = "movie";
     @BindView(R.id.tv_titleMovie)
     TextView tv_titleMovie;
@@ -45,11 +39,6 @@ public class MovieDetailsActivity extends AppCompatActivity implements View.OnCl
     TextView tv_rating;
     @BindView(R.id.tv_release_date)
     TextView tv_release_date;
-    @BindView(R.id.tv_playtxt)
-    TextView tv_playtxt;
-    @BindView(R.id.trailerLayout)
-    RelativeLayout trailerLayout;
-    private MediaController mediaControls;
     private MovieDTO movie;
 
     @Inject
@@ -65,20 +54,13 @@ public class MovieDetailsActivity extends AppCompatActivity implements View.OnCl
             movie = (MovieDTO) getIntent().getExtras().getSerializable(MOVIEDB_EXTRA);
         }
         initView();
-//        presenter.fetchVideos(movie.getId());
-
+     //   presenter.fetchVideos(movie.getId());
     }
 
     private void initView() {
         tv_titleMovie.setText(movie.getTitle());
         tv_overview_description.setText(movie.getOverview());
         tv_rating.setText(movie.getVoteAverage() + "");
-        tv_playtxt.setOnClickListener(this);
-
-        if (mediaControls == null) {
-            mediaControls = new MediaController(MovieDetailsActivity.this);
-        }
-        trailerLayout.setOnClickListener(this);
 
         try {
             tv_release_date.setText(formatReleaseDate(movie.getReleaseDate()));
@@ -92,11 +74,6 @@ public class MovieDetailsActivity extends AppCompatActivity implements View.OnCl
                 .error(R.mipmap.ic_launcher)
                 .into(iv_avatar);
     }
-    private void openYouTubeVideo(){
-        Intent i = new Intent(MovieDetailsActivity.this, YouTubePlayerActivity.class);
-        i.putExtra("youtubeVideoKey", presenter.getVideoKey());
-        startActivity(i);
-    }
 
     @Override
     public void showErrorGettingVideoFromServer() {
@@ -107,14 +84,5 @@ public class MovieDetailsActivity extends AppCompatActivity implements View.OnCl
         Date releaseServerDate;
         releaseServerDate = new SimpleDateFormat("yyyy-MM-dd").parse(movieReleaseServerDate);
         return new SimpleDateFormat("d MMM yyyy").format(releaseServerDate);
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.tv_playtxt:
-                openYouTubeVideo();
-                break;
-        }
     }
 }

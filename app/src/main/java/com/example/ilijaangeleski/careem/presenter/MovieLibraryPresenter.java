@@ -20,8 +20,8 @@ public class MovieLibraryPresenter {
     private List<MovieDTO> movies = new ArrayList<>();
     private int page=1;
     private String sortBy = MovieLibraryManager.sortASC;
-    private String asc= "ASC";
-    private String desc= "DESC";
+    private String ASC = "ASC";
+    private String DESC = "DESC";
 
 
     public MovieLibraryPresenter(
@@ -63,10 +63,10 @@ public class MovieLibraryPresenter {
         page = 1;
         if (sortBy.equals(MovieLibraryManager.sortASC)) {
             sortBy = MovieLibraryManager.sortDESC;
-            view.sortByMessage(desc);
+            view.sortByMessage(DESC);
         } else {
             sortBy = MovieLibraryManager.sortASC;
-            view.sortByMessage(asc);
+            view.sortByMessage(ASC);
         }
         fetchMovies();
     }

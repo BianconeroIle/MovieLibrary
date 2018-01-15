@@ -22,10 +22,7 @@ public interface NetworkApi {
     @GET("/movie/{movie_id}/videos")
     Call<ResponseMovieVideoDTO> fetchMovieVideo(@Query("api_key") String apiKey, @Path("movie_id") int movie_id);
 
-    //http://api.themoviedb.org/3/movie/now_playing?api_key=5dc2dfbabf3e85a3de3790440b219fca&sort_by=release_date.desc
 
     @GET("movie/now_playing")
     Call<ResponseMovieDTO> fetchMovies(@Query("api_key") String apiKey, @Query("sort_by") String sortBy, @Query("page") int page);
-
-
 }

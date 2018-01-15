@@ -1,6 +1,5 @@
 package com.example.ilijaangeleski.careem.callback;
 
-import com.example.ilijaangeleski.careem.model.ResponseMovieDTO;
 import com.example.ilijaangeleski.careem.model.ResponseMovieVideoDTO;
 
 /**

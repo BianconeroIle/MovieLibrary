@@ -2,7 +2,6 @@ package com.example.ilijaangeleski.careem.manager;
 
 import com.example.ilijaangeleski.careem.api.NetworkApi;
 import com.example.ilijaangeleski.careem.callback.MovieLibraryCallback;
-import com.example.ilijaangeleski.careem.callback.MovieLibrarySortCallback;
 import com.example.ilijaangeleski.careem.model.ResponseMovieDTO;
 
 import retrofit2.Call;

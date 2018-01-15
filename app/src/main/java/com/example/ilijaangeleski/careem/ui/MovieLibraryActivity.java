@@ -101,8 +101,6 @@ public class MovieLibraryActivity extends AppCompatActivity implements MovieLibr
         }
     }
 
-
-
     private void openMovieDetailsActivity(MovieDTO movie, ImageView movieImage) {
         Intent intent = new Intent(MovieLibraryActivity.this, MovieDetailsActivity.class);
         intent.putExtra(MovieDetailsActivity.MOVIEDB_EXTRA, movie);
