@@ -94,7 +94,7 @@ public class MovieLibraryActivity extends AppCompatActivity implements MovieLibr
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.action_sort:
-                presenter.fetchSortedMovies();
+                presenter.fetchSortedMovies(true);
                 Toast.makeText(this,"Sorted by DESC",Toast.LENGTH_LONG).show();
                 return true;
             default:

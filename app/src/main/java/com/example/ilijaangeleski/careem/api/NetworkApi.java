@@ -29,7 +29,7 @@ public interface NetworkApi {
     //http://api.themoviedb.org/3/movie/now_playing?api_key=5dc2dfbabf3e85a3de3790440b219fca&sort_by=release_date.desc
 
     @GET("movie/now_playing")
-    Call<ResponseMovieDTO> fetchMoviesSortedByDate(@Query("api_key") String apiKey, @Query("sort_by") String release_date, @Query("page") int page);
+    Call<ResponseMovieDTO> fetchMoviesSortedByDate(@Query("api_key") String apiKey, @Query("sort_by") String sortBy, @Query("page") int page);
 
 
 }

@@ -57,14 +57,16 @@ public class MovieLibraryPresenter {
         });
     }
 
-    public void fetchSortedMovies(){
+    public void fetchSortedMovies(boolean clear){
+        if (clear) {
+            movies.clear();
+        }
         libraryManager.fetchSortedMovies(page,new MovieLibrarySortCallback() {
             @Override
             public void onSuccess(ResponseMovieDTO response) {
                 MovieLibraryView view = movieLibraryViewWeakReference.get();
                 if(view != null){
-                    movies.clear();
-                    sortedMovies.addAll(response.getMovies());
+                    movies.addAll(response.getMovies());
                     view.notifyChanges();
                     page++;
                 }
