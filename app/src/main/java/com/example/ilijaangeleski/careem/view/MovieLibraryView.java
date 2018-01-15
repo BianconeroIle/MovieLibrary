@@ -9,5 +9,6 @@ public interface MovieLibraryView {
 
     void showErrorGettingMoviesFromServer();
 
+    void sortByMessage(String sortBy);
 
 }

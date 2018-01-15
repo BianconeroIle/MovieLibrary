@@ -50,7 +50,7 @@ public class MovieLibraryActivity extends AppCompatActivity implements MovieLibr
 
     public void initView() {
         libraryAdapter = new MovieLibraryAdapter(presenter.getMovies());
-        GridLayoutManager layoutManager = new GridLayoutManager(this,2);
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         movieRecyclerView.setLayoutManager(layoutManager);
         int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.cardview_default_elevation);
         movieRecyclerView.setAdapter(libraryAdapter);
@@ -86,21 +86,22 @@ public class MovieLibraryActivity extends AppCompatActivity implements MovieLibr
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu,menu);
+        inflater.inflate(R.menu.menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.action_sort:
-                presenter.fetchSortedMovies(true);
-                Toast.makeText(this,"Sorted by DESC",Toast.LENGTH_LONG).show();
+                presenter.sortMovies();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
+
+
 
     private void openMovieDetailsActivity(MovieDTO movie, ImageView movieImage) {
         Intent intent = new Intent(MovieLibraryActivity.this, MovieDetailsActivity.class);
@@ -118,5 +119,10 @@ public class MovieLibraryActivity extends AppCompatActivity implements MovieLibr
     @Override
     public void showErrorGettingMoviesFromServer() {
         Toast.makeText(this, R.string.show_error, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void sortByMessage(String sortBy) {
+        Toast.makeText(this, "Sorted by " + sortBy, Toast.LENGTH_LONG).show();
     }
 }

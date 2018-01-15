@@ -1,8 +1,6 @@
 package com.example.ilijaangeleski.careem.presenter;
 
-import com.example.ilijaangeleski.careem.api.NetworkApi;
 import com.example.ilijaangeleski.careem.callback.MovieLibraryCallback;
-import com.example.ilijaangeleski.careem.callback.MovieLibrarySortCallback;
 import com.example.ilijaangeleski.careem.manager.MovieLibraryManager;
 import com.example.ilijaangeleski.careem.model.MovieDTO;
 import com.example.ilijaangeleski.careem.model.ResponseMovieDTO;
@@ -20,8 +18,10 @@ public class MovieLibraryPresenter {
     private MovieLibraryManager libraryManager;
     private WeakReference<MovieLibraryView> movieLibraryViewWeakReference;
     private List<MovieDTO> movies = new ArrayList<>();
-    private List<MovieDTO> sortedMovies = new ArrayList<>();
     private int page=1;
+    private String sortBy = MovieLibraryManager.sortASC;
+    private String asc= "ASC";
+    private String desc= "DESC";
 
 
     public MovieLibraryPresenter(
@@ -33,7 +33,7 @@ public class MovieLibraryPresenter {
     }
 
     public void fetchMovies() {
-        libraryManager.fetchMovies(page,new MovieLibraryCallback() {
+        libraryManager.fetchMovies(page, sortBy, new MovieLibraryCallback() {
             @Override
             public void onSuccess(ResponseMovieDTO response) {
                 MovieLibraryView view = movieLibraryViewWeakReference.get();
@@ -57,30 +57,20 @@ public class MovieLibraryPresenter {
         });
     }
 
-    public void fetchSortedMovies(boolean clear){
-        if (clear) {
-            movies.clear();
+    public void sortMovies() {
+        MovieLibraryView view = movieLibraryViewWeakReference.get();
+        movies.clear();
+        page = 1;
+        if (sortBy.equals(MovieLibraryManager.sortASC)) {
+            sortBy = MovieLibraryManager.sortDESC;
+            view.sortByMessage(desc);
+        } else {
+            sortBy = MovieLibraryManager.sortASC;
+            view.sortByMessage(asc);
         }
-        libraryManager.fetchSortedMovies(page,new MovieLibrarySortCallback() {
-            @Override
-            public void onSuccess(ResponseMovieDTO response) {
-                MovieLibraryView view = movieLibraryViewWeakReference.get();
-                if(view != null){
-                    movies.addAll(response.getMovies());
-                    view.notifyChanges();
-                    page++;
-                }
-            }
-
-            @Override
-            public void onFailure(Throwable t) {
-                MovieLibraryView view = movieLibraryViewWeakReference.get();
-                if (view != null) {
-                    view.showErrorGettingMoviesFromServer();
-                }
-            }
-        });
+        fetchMovies();
     }
+
     public List<MovieDTO> getMovies() {
         return movies;
     }
