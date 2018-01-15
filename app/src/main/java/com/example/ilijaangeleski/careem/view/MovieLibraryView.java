@@ -9,5 +9,5 @@ public interface MovieLibraryView {
 
     void showErrorGettingMoviesFromServer();
 
-    void resetScrollListener();
+
 }

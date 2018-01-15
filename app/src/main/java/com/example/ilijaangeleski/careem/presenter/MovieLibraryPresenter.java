@@ -19,7 +19,7 @@ public class MovieLibraryPresenter {
     private MovieLibraryManager libraryManager;
     private WeakReference<MovieLibraryView> movieLibraryViewWeakReference;
     private List<MovieDTO> movies = new ArrayList<>();
-    int page = 1;
+
 
     public MovieLibraryPresenter(
             MovieLibraryManager libraryManager,
@@ -30,12 +30,7 @@ public class MovieLibraryPresenter {
     }
 
     public void fetchMovies() {
-        MovieLibraryView view = movieLibraryViewWeakReference.get();
-        if (view != null) {
-            view.resetScrollListener();
-        }
-
-        libraryManager.fetchMovies(page, new MovieLibraryCallback() {
+        libraryManager.fetchMovies(new MovieLibraryCallback() {
             @Override
             public void onSuccess(ResponseMovieDTO response) {
                 MovieLibraryView view = movieLibraryViewWeakReference.get();
@@ -45,11 +40,9 @@ public class MovieLibraryPresenter {
                             !response.getMovies().isEmpty()) {
                         movies.addAll(response.getMovies());
                         view.notifyChanges();
-                        page++;
                     }
                 }
             }
-
             @Override
             public void onFailure(Throwable t) {
                 MovieLibraryView view = movieLibraryViewWeakReference.get();
@@ -59,7 +52,6 @@ public class MovieLibraryPresenter {
             }
         });
     }
-
     public List<MovieDTO> getMovies() {
         return movies;
     }

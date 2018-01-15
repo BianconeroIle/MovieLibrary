@@ -24,6 +24,9 @@ android {
 repositories {
     mavenCentral()
 }
+configurations {
+    compile.exclude group: "org.apache.httpcomponents", module: "httpclient"
+}
 
 
 dependencies {
@@ -43,9 +46,5 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
     compile "com.google.dagger:dagger:2.8"
     annotationProcessor "com.google.dagger:dagger-compiler:2.8"
-    compile('com.google.apis:google-api-services-youtube:v3-rev189-1.23.0') {
-        exclude module: 'httpclient' //by artifact name
-        exclude group: 'org.apache.httpcomponents' //by group
-        exclude group: 'org.apache.httpcomponents', module: 'httpclient' //by both name and group
-    }
+    compile 'com.google.apis:google-api-services-youtube:v3-rev179-1.22.0'
 }
