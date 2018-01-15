@@ -14,13 +14,12 @@ import retrofit2.Response;
 
 public class MovieLibraryManager {
     private NetworkApi networkApi;
-    private int page=1;
 
     public MovieLibraryManager(NetworkApi networkApi) {
         this.networkApi = networkApi;
     }
 
-    public void fetchMovies(final MovieLibraryCallback callback){
+    public void fetchMovies(int page,final MovieLibraryCallback callback){
         networkApi.fetchMovies(NetworkApi.API_KEY ,page).enqueue(new Callback<ResponseMovieDTO>() {
             @Override
             public void onResponse(Call<ResponseMovieDTO> call, Response<ResponseMovieDTO> response) {

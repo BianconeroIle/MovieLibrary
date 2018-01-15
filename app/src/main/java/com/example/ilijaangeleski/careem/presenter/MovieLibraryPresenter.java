@@ -19,7 +19,7 @@ public class MovieLibraryPresenter {
     private MovieLibraryManager libraryManager;
     private WeakReference<MovieLibraryView> movieLibraryViewWeakReference;
     private List<MovieDTO> movies = new ArrayList<>();
-
+    private int page=1;
 
     public MovieLibraryPresenter(
             MovieLibraryManager libraryManager,
@@ -30,7 +30,7 @@ public class MovieLibraryPresenter {
     }
 
     public void fetchMovies() {
-        libraryManager.fetchMovies(new MovieLibraryCallback() {
+        libraryManager.fetchMovies(page,new MovieLibraryCallback() {
             @Override
             public void onSuccess(ResponseMovieDTO response) {
                 MovieLibraryView view = movieLibraryViewWeakReference.get();
@@ -40,6 +40,7 @@ public class MovieLibraryPresenter {
                             !response.getMovies().isEmpty()) {
                         movies.addAll(response.getMovies());
                         view.notifyChanges();
+                        page++;
                     }
                 }
             }

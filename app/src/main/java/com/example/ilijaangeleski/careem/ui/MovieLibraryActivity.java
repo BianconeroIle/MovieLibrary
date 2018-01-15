@@ -17,6 +17,7 @@ import com.example.ilijaangeleski.careem.di.components.DaggerMovieLibraryActivit
 import com.example.ilijaangeleski.careem.di.modules.MovieLibraryActivityModule;
 import com.example.ilijaangeleski.careem.model.MovieDTO;
 import com.example.ilijaangeleski.careem.presenter.MovieLibraryPresenter;
+import com.example.ilijaangeleski.careem.util.EndlessRecyclerViewScrollListener;
 import com.example.ilijaangeleski.careem.util.SpacesItemDecoration;
 import com.example.ilijaangeleski.careem.view.MovieLibraryView;
 
@@ -31,6 +32,7 @@ public class MovieLibraryActivity extends AppCompatActivity implements MovieLibr
     @Inject
     MovieLibraryPresenter presenter;
     private MovieLibraryAdapter libraryAdapter;
+    private EndlessRecyclerViewScrollListener scrollListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +47,18 @@ public class MovieLibraryActivity extends AppCompatActivity implements MovieLibr
 
     public void initView() {
         libraryAdapter = new MovieLibraryAdapter(presenter.getMovies());
-        movieRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        GridLayoutManager layoutManager = new GridLayoutManager(this,2);
+        movieRecyclerView.setLayoutManager(layoutManager);
         int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.cardview_default_elevation);
         movieRecyclerView.setAdapter(libraryAdapter);
         movieRecyclerView.addItemDecoration(new SpacesItemDecoration(spacingInPixels));
+        scrollListener = new EndlessRecyclerViewScrollListener(layoutManager) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                presenter.fetchMovies();
+            }
+        };
+        movieRecyclerView.addOnScrollListener(scrollListener);
     }
 
     private void initListeners() {
