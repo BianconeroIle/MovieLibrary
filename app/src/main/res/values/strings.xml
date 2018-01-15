@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">Careem</string>
-    <string name="show_error">Error getting movie from server</string>
+    <string name="show_error">Error getting movies from server</string>
     <string name="show_error_getting_video">Error getting video from server</string>
 </resources>

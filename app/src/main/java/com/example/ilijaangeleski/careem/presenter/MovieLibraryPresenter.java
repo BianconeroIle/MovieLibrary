@@ -2,6 +2,7 @@ package com.example.ilijaangeleski.careem.presenter;
 
 import com.example.ilijaangeleski.careem.api.NetworkApi;
 import com.example.ilijaangeleski.careem.callback.MovieLibraryCallback;
+import com.example.ilijaangeleski.careem.callback.MovieLibrarySortCallback;
 import com.example.ilijaangeleski.careem.manager.MovieLibraryManager;
 import com.example.ilijaangeleski.careem.model.MovieDTO;
 import com.example.ilijaangeleski.careem.model.ResponseMovieDTO;
@@ -19,7 +20,9 @@ public class MovieLibraryPresenter {
     private MovieLibraryManager libraryManager;
     private WeakReference<MovieLibraryView> movieLibraryViewWeakReference;
     private List<MovieDTO> movies = new ArrayList<>();
+    private List<MovieDTO> sortedMovies = new ArrayList<>();
     private int page=1;
+
 
     public MovieLibraryPresenter(
             MovieLibraryManager libraryManager,
@@ -44,6 +47,29 @@ public class MovieLibraryPresenter {
                     }
                 }
             }
+            @Override
+            public void onFailure(Throwable t) {
+                MovieLibraryView view = movieLibraryViewWeakReference.get();
+                if (view != null) {
+                    view.showErrorGettingMoviesFromServer();
+                }
+            }
+        });
+    }
+
+    public void fetchSortedMovies(){
+        libraryManager.fetchSortedMovies(page,new MovieLibrarySortCallback() {
+            @Override
+            public void onSuccess(ResponseMovieDTO response) {
+                MovieLibraryView view = movieLibraryViewWeakReference.get();
+                if(view != null){
+                    movies.clear();
+                    sortedMovies.addAll(response.getMovies());
+                    view.notifyChanges();
+                    page++;
+                }
+            }
+
             @Override
             public void onFailure(Throwable t) {
                 MovieLibraryView view = movieLibraryViewWeakReference.get();
